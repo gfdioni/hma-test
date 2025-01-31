@@ -42,12 +42,14 @@ class UserManagementController extends Controller
         $request->validate([
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,user_email'],
+            'phone_number' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         User::create([
             'user_fullname' => $request->nama,
             'user_email' => $request->email,
+            'user_phone_number' => $request->phone_number,
             'password'  => Hash::make($request->password),
             'user_status' => 1
         ]);
@@ -63,8 +65,8 @@ class UserManagementController extends Controller
 
     public function update(Request $request)
     {
-
         $request->validate([
+            'user_email' => ['nullable','string', 'email', 'max:255', 'unique:users,user_email,'.$request->user_id .',user_id'],
             'password' => ['nullable','string', 'min:8', 'confirmed'],
         ]);
 

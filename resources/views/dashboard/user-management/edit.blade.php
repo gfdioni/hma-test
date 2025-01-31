@@ -24,6 +24,15 @@
 
       <!-- Default box -->
       <div class="card">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
               <!-- /.card-header -->
               <div class="card-body">
                 <form action="{{ route('user-management-update') }}" method="post">
@@ -36,6 +45,10 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="user_email" value="{{ $user_email }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Nomer Telp</label>
+                        <input type="text" id="phone_number" name="user_phone_number" value="{{ $user_phone_number }}" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\SettingController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -22,5 +23,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [UserManagementController::class, 'edit'])->name('user-management-edit');
         Route::post('/update', [UserManagementController::class, 'update'])->name('user-management-update');
         Route::get('/hapus/{id}', [UserManagementController::class, 'delete'])->name('user-management-hapus');
+    });
+
+    Route::prefix('setting')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('setting-index');
+        Route::post('/update', [SettingController::class, 'update'])->name('setting-update');
     });
 });

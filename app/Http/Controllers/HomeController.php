@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['user_registered'] = User::all()->count();
-        $data['user_logged'] = DB::table('sessions')->count();
+        $data['user_logged'] = DB::table('sessions')->distinct()->count('user_id');
 
         return view('dashboard.index',$data);
     }
